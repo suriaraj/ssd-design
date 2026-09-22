@@ -5,6 +5,8 @@ A banking application manages accounts, balances, deposits, withdrawals, and fun
 ### Question:
 How would you structure the program to manage state, business rules, and concurrent operations safely?
 
+### Answer: create a row lock for each account and release individual state upon completion and process, rollback on failure to release the state and lock
+
 ## Real-Time Event Processing
 
 A system receives thousands of events per second from different sources. Each event may trigger multiple independent actions. The system must continue processing new events even when one action fails or takes longer than expected.
@@ -12,12 +14,16 @@ A system receives thousands of events per second from different sources. Each ev
 ### Question:
 How would you structure the application to process these events efficiently and independently?
 
+### Answer: Setup event driven architecture to control the actions.
+
 ## Infrastructure as Code
 
 An organization manages hundreds of servers, databases, networks, and cloud resources. Engineers define the desired infrastructure configuration in source-controlled files. The system determines what needs to be created, modified, or removed to reach the desired state.
 
 ### Question:
 How would you design the programming model for this system? What should the user's configuration describe, and how should the system translate that description into actual infrastructure changes?
+
+### Answer: Using DSC's and platform independent model
 
 ## Cross-Cutting Concerns
 
