@@ -84,7 +84,7 @@ class TradeProcessor:
          #   except Exception as e:  ### variable e never used, makes broader exceptions to catch
           #      conn.rollback()
            #     raise
-            except pyodbc.Error
+            except pyodbc.Error:
                conn.rollback()
                raise
         print(f"INFO: {len(trades)} trades processed")
