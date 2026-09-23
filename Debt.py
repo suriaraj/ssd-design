@@ -1,3 +1,5 @@
+##readable violation --> no comments explaining what is being done anywhere
+
 import pyodbc
 
 class TradeRecord:
@@ -60,13 +62,13 @@ class TradeProcessor:
 
         # --- Insert into database ---
         ### hard coded db connection string --> use secrets or vaults 
-        connection_string = (
-            "DRIVER={ODBC Driver 17 for SQL Server};"
-            "SERVER=localhost;"
-            "DATABASE=TradeDatabase;"
-            "Trusted_Connection=yes;"
-        )
-
+#        connection_string = (
+ #           "DRIVER={ODBC Driver 17 for SQL Server};"
+  #          "SERVER=localhost;"
+   #         "DATABASE=TradeDatabase;"
+    #        "Trusted_Connection=yes;"
+     #   )
+         connection_string = ${{ env.TRADE_DB_CONNECTION }}
         with pyodbc.connect(connection_string) as conn:
             cursor = conn.cursor()
             try:
@@ -79,8 +81,10 @@ class TradeProcessor:
                         trade.price
                     )
                 conn.commit()
-            except Exception as e:  ### variable e never used, makes broader exceptions to catch
-                conn.rollback()
-                raise
-
+         #   except Exception as e:  ### variable e never used, makes broader exceptions to catch
+          #      conn.rollback()
+           #     raise
+            except pyodbc.Error
+               conn.rollback()
+               raise
         print(f"INFO: {len(trades)} trades processed")
