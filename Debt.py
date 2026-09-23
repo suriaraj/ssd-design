@@ -59,6 +59,7 @@ class TradeProcessor:
             line_count += 1
 
         # --- Insert into database ---
+        ### hard coded db connection string --> use secrets or vaults 
         connection_string = (
             "DRIVER={ODBC Driver 17 for SQL Server};"
             "SERVER=localhost;"
@@ -78,7 +79,7 @@ class TradeProcessor:
                         trade.price
                     )
                 conn.commit()
-            except Exception as e:
+            except Exception as e:  ### variable e never used, makes broader exceptions to catch
                 conn.rollback()
                 raise
 
