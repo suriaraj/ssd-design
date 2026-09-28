@@ -1,45 +1,53 @@
-Input Values:
-Deposit > 0
-Withdraw > 0
-Account creation Opening Deposit >= 500
+# Account Requirements
 
-Account:
+## Input Values
+- Deposit > 0
+- Withdraw > 0
+- Account creation opening deposit >= 500
+
+## Account Rules
 When an account is created:
-Minimum balance = ₹500
-Overdraft limit = ₹500
-Status = Active
-Opening deposit provided by customer
 
-Core:
-AccountNumber
-Balance
-MinimumBalance
-OverdraftAvailable
-Status:
-├─Active
-├─Overdue
-├─Suspended
-├─Closed
+- Minimum balance = ₹500
+- Overdraft limit = ₹500
+- Status = Active
+- Opening deposit provided by customer
 
-Account
-├─ Deposit()
-├─ Withdraw()
-├─ UpdateStatus()
-├─ GetBalance()
-└─ GetStatus()
+## Core Account Fields
+- AccountNumber
+- Balance
+- MinimumBalance
+- OverdraftAvailable
+- Status:
+  - Active
+  - Overdue
+  - Suspended
+  - Closed
 
-Withdraw:
-Balance = 300
-Overdraft = 500
-Withdraw 600
-Use:
-300 from balance
-300 from overdraft
-Remaining:
-Balance = 0
-Overdraft = 200
+## Account Operations
+- Deposit()
+- Withdraw()
+- UpdateStatus()
+- GetBalance()
+- GetStatus()
 
-Deposits: Call UpdateStatus for one place logic, must be done after every deposit or withdraw
+## Withdraw Example
+- Balance = 300
+- Overdraft = 500
+- Withdraw 600
+
+### Usage
+- 300 from balance
+- 300 from overdraft
+
+### Remaining
+- Balance = 0
+- Overdraft = 200
+
+## Status Update Rule
+Deposits: call `UpdateStatus()` for one-place logic, and do it after every deposit or withdraw.
+
+```text
 If Overdraft = 0
     -> Suspended
 
@@ -51,3 +59,4 @@ Else if Balance >= 500
 
 Else
     -> Closed
+```
